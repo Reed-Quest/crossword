@@ -151,3 +151,18 @@ for (let i=0; i < grid_size; i++) {
     }
     addBreak(puzzle);
 }
+
+var first_horizontal = document.createElement("hr");
+
+
+
+
+
+
+
+
+
+
+
+
+
