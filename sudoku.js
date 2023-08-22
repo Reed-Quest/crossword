@@ -151,31 +151,3 @@ for (let i=0; i < grid_size; i++) {
     }
     addBreak(puzzle);
 }
-
-var first_horizontal = document.createElement("hr");
-puzzle.appendChild(first_horizontal);
-
-first_horizontal.style.width = valueToCSSPixels(puzzle.clientWidth);
-first_horizontal.style.top = valueToCSSPixels((puzzle.clientHeight / 3) - 10);
-
-var second_horizontal = document.createElement("hr");
-puzzle.appendChild(second_horizontal);
-
-second_horizontal.style.width = valueToCSSPixels(puzzle.clientWidth);
-second_horizontal.style.top = valueToCSSPixels((2 * (puzzle.clientHeight / 3)) - 10);
-
-var first_vertical = document.createElement("hr");
-puzzle.appendChild(first_vertical);
-
-first_vertical.style.width = valueToCSSPixels(puzzle.clientHeight);
-first_vertical.style.left = valueToCSSPixels((puzzle.clientWidth / -6) - 2);
-first_vertical.style.top = valueToCSSPixels((puzzle.clientHeight / 2) - 10);
-first_vertical.style.transform = "rotate(90deg)";
-
-var second_vertical = document.createElement("hr");
-puzzle.appendChild(second_vertical);
-
-second_vertical.style.width = valueToCSSPixels(puzzle.clientHeight);
-second_vertical.style.left = valueToCSSPixels((puzzle.clientWidth / 6) - 2);
-second_vertical.style.top = valueToCSSPixels((puzzle.clientHeight / 2) - 10);
-second_vertical.style.transform = "rotate(90deg)";
