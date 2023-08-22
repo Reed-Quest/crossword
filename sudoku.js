@@ -1,10 +1,12 @@
-function addTile(crossword_object,tiles_per_row,total_width) {
+function addTile(puzzle_object,tiles_per_row) {
     var tile = document.createElement("input");
 
     tile.type = "text";
 
+    var total_width = puzzle_object.clientWidth;
+    total_width = parseFloat(total_width);
+
     dimensions = calculateTileDimensions(total_width,tiles_per_row);
-    console.log(dimensions);
 
     var text_dimensions = dimensions.toString();
     text_dimensions = text_dimensions.concat("px");
@@ -18,16 +20,16 @@ function addTile(crossword_object,tiles_per_row,total_width) {
     tile.style.borderRadius = "10%";
     tile.style.borderWidth = "1px";
 
-    crossword_object.appendChild(tile);
+    puzzle_object.appendChild(tile);
 
     tile.addEventListener("input",checkSuccessByInput);
 
     return(tile);
 }
 
-function addBreak(crossword_object) {
+function addBreak(puzzle_object) {
     var curr_break = document.createElement("br");
-    crossword_object.appendChild(curr_break);
+    puzzle_object.appendChild(curr_break);
     return(curr_break);
 }
 
@@ -117,130 +119,18 @@ function calculateTileDimensions(overall_side,num_tiles_per_side) {
     return(space_per_tile);
 }
 
-var control_dict = {
-    1:{
-        1:"0",
-        2:"0",
-        3:"8",
-        4:"2",
-        5:"0",
-        6:"4",
-        7:"0",
-        8:"0",
-        9:"0"
-    },
-    2:{
-        1:"0",
-        2:"9",
-        3:"0",
-        4:"0",
-        5:"0",
-        6:"0",
-        7:"0",
-        8:"2",
-        9:"0"
-    },
-    3:{
-        1:"3",
-        2:"0",
-        3:"0",
-        4:"0",
-        5:"0",
-        6:"0",
-        7:"0",
-        8:"0",
-        9:"0"
-    },
-    4:{
-        1:"0",
-        2:"0",
-        3:"0",
-        4:"4",
-        5:"0",
-        6:"0",
-        7:"9",
-        8:"0",
-        9:"0"
-    },
-    5:{
-        1:"0",
-        2:"7",
-        3:"0",
-        4:"0",
-        5:"1",
-        6:"0",
-        7:"0",
-        8:"5",
-        9:"0"
-    },
-    6:{
-        1:"0",
-        2:"0",
-        3:"0",
-        4:"0",
-        5:"6",
-        6:"3",
-        7:"2",
-        8:"8",
-        9:"1"
-    },
-    7:{
-        1:"0",
-        2:"0",
-        3:"3",
-        4:"0",
-        5:"0",
-        6:"6",
-        7:"1",
-        8:"0",
-        9:"2"
-    },
-    8:{
-        1:"0",
-        2:"8",
-        3:"0",
-        4:"0",
-        5:"4",
-        6:"0",
-        7:"0",
-        8:"6",
-        9:"0"
-    },
-    9:{
-        1:"2",
-        2:"0",
-        3:"0",
-        4:"9",
-        5:"0",
-        6:"1",
-        7:"0",
-        8:"0",
-        9:"0"
-    }
-}
-
-var tiles_to_reveal = {
-    1:[3,4,6],
-    2:[2,8],
-    3:[1],
-    4:[4,7],
-    5:[2,5,8],
-    6:[5,6,7,8,9],
-    7:[3,6,7,9],
-    8:[2,5,8],
-    9:[1,4,6]
+function valueToCSSPixels(numeric) {
+    var new_value = numeric.toString();
+    new_value = new_value.concat("px");
+    return(new_value);
 }
 
 var grid_size = 9;
-var container_width = 500;
+var css_width = "500px";
 
-var css_width = container_width.toString();
-css_width = css_width.concat("px");
+var puzzle = document.getElementById("puzzle");
 
-var crossword = document.getElementById("crossword");
-
-crossword.style.width = css_width;
-crossword.style.height = css_width;
+puzzle.style.height = puzzle.style.width;
 
 for (let i=0; i < grid_size; i++) {
     var row_num = i + 1;
@@ -249,9 +139,9 @@ for (let i=0; i < grid_size; i++) {
     var reveal_list = tiles_to_reveal[row_num];
 
     for (let j=0; j < grid_size; j++) {
-        var curr_tile = addTile(crossword,9,container_width);
+        var curr_tile = addTile(puzzle,grid_size);
 
-        var column_num = j + 1;
+        var column_num = j + 1;first_horizontal
 
         curr_tile.correct = curr_row[column_num];
 
@@ -259,8 +149,33 @@ for (let i=0; i < grid_size; i++) {
             curr_tile.value = curr_tile.correct;
         }
     }
-    addBreak(crossword);
+    addBreak(puzzle);
 }
 
-allTilesFilled();
+var first_horizontal = document.createElement("hr");
+puzzle.appendChild(first_horizontal);
 
+first_horizontal.style.width = valueToCSSPixels(puzzle.clientWidth);
+first_horizontal.style.top = valueToCSSPixels((puzzle.clientHeight / 3) - 10);
+
+var second_horizontal = document.createElement("hr");
+puzzle.appendChild(second_horizontal);
+
+second_horizontal.style.width = valueToCSSPixels(puzzle.clientWidth);
+second_horizontal.style.top = valueToCSSPixels((2 * (puzzle.clientHeight / 3)) - 10);
+
+var first_vertical = document.createElement("hr");
+puzzle.appendChild(first_vertical);
+
+first_vertical.style.width = valueToCSSPixels(puzzle.clientHeight);
+first_vertical.style.left = valueToCSSPixels((puzzle.clientWidth / -6) - 2);
+first_vertical.style.top = valueToCSSPixels((puzzle.clientHeight / 2) - 10);
+first_vertical.style.transform = "rotate(90deg)";
+
+var second_vertical = document.createElement("hr");
+puzzle.appendChild(second_vertical);
+
+second_vertical.style.width = valueToCSSPixels(puzzle.clientHeight);
+second_vertical.style.left = valueToCSSPixels((puzzle.clientWidth / 6) - 2);
+second_vertical.style.top = valueToCSSPixels((puzzle.clientHeight / 2) - 10);
+second_vertical.style.transform = "rotate(90deg)";

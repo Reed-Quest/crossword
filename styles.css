@@ -1,5 +1,6 @@
-#crossword {
-    width: 500px;
-    height: 500px;
+hr {
+    height: 1px;
+    background-color: black;
+    position: absolute;
 }
 
