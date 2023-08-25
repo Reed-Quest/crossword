@@ -3,7 +3,7 @@ function addTile(puzzle_object,tiles_per_row) {
 
     tile.type = "text";
 
-    var total_width = puzzle_object.clientWidth;
+    var total_width = puzzle_object.offsetWidth;
     total_width = parseFloat(total_width);
 
     dimensions = calculateTileDimensions(total_width,tiles_per_row);
@@ -151,8 +151,6 @@ for (let i=0; i < grid_size; i++) {
     }
     addBreak(puzzle);
 }
-
-var first_horizontal = document.createElement("hr");
 
 
 
