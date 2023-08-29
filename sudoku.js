@@ -3,7 +3,7 @@ function addTile(puzzle_object,tiles_per_row) {
 
     tile.type = "text";
 
-    var total_width = puzzle_object.offsetWidth;
+    var total_width = puzzle_object.parentElement.clientWidth;
     total_width = parseFloat(total_width);
 
     dimensions = calculateTileDimensions(total_width,tiles_per_row);
@@ -126,11 +126,10 @@ function valueToCSSPixels(numeric) {
 }
 
 var grid_size = 9;
-var css_width = "500px";
 
 var puzzle = document.getElementById("puzzle");
 
-puzzle.style.height = puzzle.style.width;
+puzzle.style.clientHeight = puzzle.style.clientWidth;
 
 for (let i=0; i < grid_size; i++) {
     var row_num = i + 1;
@@ -141,7 +140,7 @@ for (let i=0; i < grid_size; i++) {
     for (let j=0; j < grid_size; j++) {
         var curr_tile = addTile(puzzle,grid_size);
 
-        var column_num = j + 1;first_horizontal
+        var column_num = j + 1;
 
         curr_tile.correct = curr_row[column_num];
 
@@ -150,6 +149,20 @@ for (let i=0; i < grid_size; i++) {
         }
     }
     addBreak(puzzle);
+}
+
+var explainer_text = document.getElementById("explainer-text");
+
+explainer_text.textContent = control_text;
+
+if (screen.width > 800) {
+    explainer_text.style.position = "relative";
+
+    var top_offset = puzzle.clientHeight;
+    top_offset = top_offset/2 - explainer_text.clientHeight;
+    top_offset = valueToCSSPixels(top_offset);
+
+    explainer_text.style.top = top_offset;
 }
 
 

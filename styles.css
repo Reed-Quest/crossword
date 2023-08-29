@@ -1,2 +1,25 @@
+.sudoku-text {
+    margin: 20px;
+}
 
+.puzzle-container {
+    height: fit-content;
+    margin-top: 0px;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        float: left;
+        width: 100%;
+        margin-top: 0px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .column {
+        float: left;
+        width: 50%;
+        margin-top: 0px;
+    }
+}
 
