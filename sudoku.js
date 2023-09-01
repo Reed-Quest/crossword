@@ -33,6 +33,21 @@ function addBreak(puzzle_object) {
     return(curr_break);
 }
 
+function addLine(puzzle_object) {
+    var curr_break = document.createElement("hr");
+    puzzle_object.appendChild(curr_break);
+    curr_break.className = "sudoku-horizontal-break";
+    return(curr_break);
+}
+
+function addVertical(puzzle_object,height) {
+    var curr_break = document.createElement("input");
+    puzzle_object.appendChild(curr_break);
+    curr_break.className = "vl";
+    curr_break.style.height = valueToCSSPixels(height);
+    return(curr_break);
+}
+
 function colorByInput(e) {
     tile = e.srcElement;
 
@@ -113,7 +128,7 @@ function colorBySuccess() {
 }
 
 function calculateTileDimensions(overall_side,num_tiles_per_side) {
-    var total_margin = 12 * num_tiles_per_side;
+    var total_margin = 12 * num_tiles_per_side + 10;
     var available_space = overall_side - total_margin;
     var space_per_tile = available_space / num_tiles_per_side;
     return(space_per_tile);
@@ -131,6 +146,9 @@ var puzzle = document.getElementById("puzzle");
 
 puzzle.style.clientHeight = puzzle.style.clientWidth;
 
+var tile_dimension = calculateTileDimensions(puzzle.clientWidth,grid_size);
+var vertical_height = tile_dimension * 1.6;
+
 for (let i=0; i < grid_size; i++) {
     var row_num = i + 1;
     var curr_row = control_dict[row_num];
@@ -147,8 +165,17 @@ for (let i=0; i < grid_size; i++) {
         if (contains(reveal_list,column_num)) {
             curr_tile.value = curr_tile.correct;
         }
+
+        if (j == 2 || j == 5) {
+            addVertical(puzzle,vertical_height);
+        }
     }
-    addBreak(puzzle);
+
+    if (i == 2 || i == 5) {
+        addLine(puzzle);
+    } else {
+        addBreak(puzzle);
+    }
 }
 
 var explainer_text = document.getElementById("explainer-text");

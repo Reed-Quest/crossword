@@ -1,25 +1,40 @@
-.sudoku-text {
-    margin: 20px;
-}
-
-.puzzle-container {
-    height: fit-content;
-    margin-top: 0px;
-}
-
-@media screen and (max-width: 800px) {
-    .column {
-        float: left;
-        width: 100%;
-        margin-top: 0px;
-    }
-}
-
-@media screen and (min-width: 800px) {
-    .column {
-        float: left;
-        width: 50%;
-        margin-top: 0px;
-    }
-}
+.vl {
+    width: 2px;
+      padding: 0px;
+      background-color: black;
+      border: none;
+  }
+  
+  .sudoku-text {
+      margin: 20px;
+  }
+  
+  .puzzle-container {
+      height: fit-content;
+      margin-top: 0px;
+  }
+  
+  @media screen and (max-width: 800px) {
+      .column {
+          float: left;
+          width: 100%;
+          margin-top: 0px;
+      }
+  }
+  
+  @media screen and (min-width: 800px) {
+      .column {
+          float: left;
+          width: 50%;
+          margin-top: 0px;
+      }
+  }
+  
+  .sudoku-horizontal-break {
+      box-sizing: content-box;
+      margin: 0px;
+      background-color: black;
+      border: none;
+      height: 2px;
+  }
 
