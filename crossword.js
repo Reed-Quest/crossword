@@ -5,7 +5,6 @@ function addTile(puzzle_object,tiles_per_row) {
 
     var total_width = puzzle_object.clientWidth;
     total_width = parseFloat(total_width);
-    console.log(total_width);
 
     dimensions = calculateTileDimensions(total_width,tiles_per_row);
 
@@ -151,15 +150,21 @@ var tile_dimension = calculateTileDimensions(puzzle.clientWidth,grid_size);
 var vertical_height = tile_dimension * 1.6;
 
 for (let i=0; i < grid_size; i++) {
-    var row_num = i + 1;
-    var curr_row = control_dict[row_num];
-
-    var reveal_list = tiles_to_reveal[row_num];
 
     for (let j=0; j < grid_size; j++) {
+
         var curr_tile = addTile(puzzle,grid_size);
 
-        var column_num = j + 1;
+        var curr_value = control_dict[j][i];
+        console.log(curr_value);
+
+        if (curr_value != null) {
+            curr_tile.value = curr_value;
+        } else {
+            curr_tile.style.borderColor = "transparent";
+        }
+
+
     }
 
     addBreak(puzzle);

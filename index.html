@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/bb1d08a9b2.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <style>
@@ -35,7 +36,18 @@
 </head>
 <body>
     <form id="puzzle" style="max-width: 1000px; width: 100%;"></form>
-    <script src="https://reed-quest.github.io/crossword/control/sudoko_prototype_control.js"></script>
+    <script>
+        var control_dict = [];
+        $.ajax({
+        url: 'https://reed-quest.github.io/crossword/test.json',
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            control_dict = json;
+        }
+        });
+        console.log(control_dict);
+    </script>
     <script src="./crossword.js"></script>
 </body>
 </html>
