@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import json
 
 def find_shared_letter(word1,word2):
     shared_ls = []
@@ -19,7 +20,17 @@ def have_shared_letter(word1,word2):
     return False
 
 def retrieve_tile_value(x,y):
-    return grid[x][y]
+    if tile_exists(x,y):
+        return grid[x][y]
+    else:
+        return "*"
+
+def tile_exists(x,y):
+    bounds = grid_bounds()
+    x_is_valid = bounds['x']['min'] <= x <= bounds['x']['max']
+    y_is_valid = bounds['y']['min'] <= y <= bounds['y']['max'] 
+    return x_is_valid and y_is_valid
+
 
 def place_letter(letter,x,y):
     grid[x][y] = letter
@@ -105,26 +116,30 @@ def is_possible_placement(start_x,start_y,word,direction):
 
     i = 0
     while success and i < len(word):
-        curr_tile = retrieve_tile_value(curr_x,curr_y)
-        curr_letter = word[i]
 
-        if direction == "right":
-            border1 = retrieve_tile_value(curr_x,curr_y-1)
-            border2 = retrieve_tile_value(curr_x,curr_y+1)
+        if not tile_exists(curr_x,curr_y):
+            success = False
         else:
-            border1 = retrieve_tile_value(curr_x-1,curr_y)
-            border2 = retrieve_tile_value(curr_x+1,curr_y)
-        
-        if curr_tile != None:
-            if curr_tile != curr_letter:
-                success = False             
-        else:
-            if border1 != None or border2 != None:
-                success = False
+            curr_tile = retrieve_tile_value(curr_x,curr_y)
+            curr_letter = word[i]
 
-        curr_x += x_increment
-        curr_y += y_increment
-        i += 1
+            if direction == "right":
+                border1 = retrieve_tile_value(curr_x,curr_y-1)
+                border2 = retrieve_tile_value(curr_x,curr_y+1)
+            else:
+                border1 = retrieve_tile_value(curr_x-1,curr_y)
+                border2 = retrieve_tile_value(curr_x+1,curr_y)
+            
+            if curr_tile != None:
+                if curr_tile != curr_letter:
+                    success = False             
+            else:
+                if border1 != None or border2 != None:
+                    success = False
+
+            curr_x += x_increment
+            curr_y += y_increment
+            i += 1
 
     return success
 
@@ -246,9 +261,9 @@ while j < 100 and success_rate < 1:
     grid = {}
     placed_words = {}
 
-    for x in range(-50,50):
+    for x in range(0,20):
         grid[x] = {}
-        for y in range(-50,50):
+        for y in range(0,20):
             grid[x][y] = None
 
     first_word = random.choice(sorted_words_ls)
@@ -276,6 +291,9 @@ print_grid()
 all_placed_words = get_all_placed_words()
 print("Success Rate:",end="\t")
 print(str(len(all_placed_words)),"/",str(len(words_ls)))
+
+with open("test.json", "w") as outfile:
+    json.dump(grid,outfile)
 
 
 

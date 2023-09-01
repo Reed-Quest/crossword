@@ -1,41 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Crossword Game - Template</title>
+<title>Sudoku Game - Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/bb1d08a9b2.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<style>
-  
-  .puzzle-container {
-      height: fit-content;
-      margin-top: 0px;
-  }
-  
-  @media screen and (max-width: 800px) {
-      .column {
-          float: left;
-          width: 100%;
-          margin-top: 0px;
-      }
-  }
-  
-  @media screen and (min-width: 800px) {
-      .column {
-          float: left;
-          width: 50%;
-          margin-top: 0px;
-      }
-  }
-
-</style>
+<link rel="stylesheet" href="https://reed-quest.github.io/crossword/styles.css">
 
 </head>
 <body>
-    <form id="puzzle" style="max-width: 1000px; width: 100%;"></form>
+    <div class="puzzle-container">
+        <div class="column">
+            <form id="puzzle" style="max-width: 500px; width: 100%;">
+        </div>
+        <div class="column">
+            <div class="sudoku-text">
+                <h2 id="explainer-text">This week's sudoku</h2>
+            </div>
+        </div>
+    </div>
+    </form>
     <script src="https://reed-quest.github.io/crossword/control/sudoko_prototype_control.js"></script>
-    <script src="./crossword.js"></script>
+    <script src="https://reed-quest.github.io/crossword/sudoku.js"></script>
 </body>
 </html>
