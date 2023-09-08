@@ -1,8 +1,9 @@
 .vl {
     width: 2px;
       padding: 0px;
-      background-color: black;
+      background-color: black !important;
       border: none;
+      float: left;
   }
   
   .sudoku-text {
